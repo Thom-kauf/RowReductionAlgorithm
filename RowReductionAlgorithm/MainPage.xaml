@@ -8,19 +8,22 @@
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
+            <HorizontalStackLayout>
+                <Label
+                Text="Rows: "
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+                />
+                <Entry>
+                    
+                </Entry>
 
+                <Label
+                    Text = "x Columns:"
+                    FontSize = "32"
+                />
+            </HorizontalStackLayout>
             <Label
                 Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level2"
