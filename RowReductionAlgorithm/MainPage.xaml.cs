@@ -115,10 +115,10 @@ public partial class MainPage : ContentPage
         vsl.Add(hsl2);
 
         Button refButton = new();
-        refButton.Text = "REF that shit";
+        refButton.Text = "REF";
 
         Button rrefButton = new();
-        rrefButton.Text = "RREF that shit";
+        rrefButton.Text = "RREF";
 
         hsl2.Add(rrefButton);
         hsl2.Add(refButton);
