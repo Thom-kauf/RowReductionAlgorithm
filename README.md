@@ -8,4 +8,4 @@ The Interactive Row Reduction Algorithm Calculator is a .NET MAUI application, b
 
 The goal of this project is to build a useful application, but more importantly to practice event driven programming. 
 
-- I definitely need to clean up some of the code. Some of the logic is a bit weird. It appears to be working though.
+#I definitely need to clean up some of the code. Some of the logic is a bit weird. It appears to be working though.
