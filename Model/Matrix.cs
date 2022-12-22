@@ -8,11 +8,11 @@ public class Matrix
     //dimensions of the matrix
     private int colNum;
     private int rowNum;
-    private double[,] backingArray;
+    public double[,] backingArray;
 
     public Matrix ()
     {
-
+        
     }   
 
     /// <summary>
@@ -38,5 +38,15 @@ public class Matrix
     {
         get { return backingArray; }
         set { backingArray = value; }
+    }
+
+    public void Ref()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Rref()
+    {
+        throw new NotImplementedException();
     }
 }

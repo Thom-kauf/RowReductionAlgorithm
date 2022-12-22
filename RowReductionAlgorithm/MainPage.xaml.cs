@@ -1,11 +1,9 @@
-﻿
-
-namespace RowReductionAlgorithm;
+﻿namespace RowReductionAlgorithm;
 
 public partial class MainPage : ContentPage
 {
 	private Matrix matrix;
-
+	private Dictionary<string, Entry> entries;
 	public MainPage()
 	{
 		InitializeComponent();
@@ -60,6 +58,7 @@ public partial class MainPage : ContentPage
 	{
 		if (matrix.RowNum > 0 && matrix.ColNum > 0)
 		{
+			matrix.BackingArray = new double[matrix.RowNum, matrix.ColNum];
 			HSL.Clear();
             MakeGrid();
         }
@@ -71,76 +70,118 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+	private void SetBackingArr()
+	{
+
+	}
+	
+
 	/// <summary>
 	/// Makes a grid of entries that is rowNum rows by colNum columns
 	/// </summary>
 	private void MakeGrid()
 	{
 
-		List<Entry> entries = new List<Entry>();
-
+		//initialize the 2d arrays of entries
+		entries = new();
+		//generate as many entries as specified
         for (int i = 0; i < matrix.RowNum; i++)
         {
+			//make the entries in a list of vertical stack layouts essentially
 			HorizontalStackLayout hsl = new();
 			vsl.Add(hsl);
+
+
 			for (int j = 0; j < matrix.ColNum; j++)
 			{
+				//show it in gui
 				Entry entry = new Entry();
 				hsl.Add(entry);
 
-				
-				entries.Add(entry);
+				//add to dictionary to keep track of index
+				entries.Add("" + i + j, entry);
 			}
         }
+		MakeButtons();
+    }
 
+	/// <summary>
+	/// helper method just for readibility. Makes the ref and rref buttons to start the next phase of the app
+	/// </summary>
+	private void MakeButtons()
+	{
+        //create the buttons
+        HorizontalStackLayout hsl2 = new();
+        vsl.Add(hsl2);
 
-		HorizontalStackLayout hsl2 = new();
-		vsl.Add(hsl2);
+        Button refButton = new();
+        refButton.Text = "REF that shit";
 
-		
+        Button rrefButton = new();
+        rrefButton.Text = "RREF that shit";
 
-		Button refButton = new();
-		refButton.Text = "REF that shit";
+        hsl2.Add(rrefButton);
+        hsl2.Add(refButton);
 
-		Button reffButton = new();
-		reffButton.Text = "REFF that shit";
+        //set up the handlers for the different buttons
+        rrefButton.Clicked += BeginRRef;
+        refButton.Clicked += BeginRef;
+    }
 
-		hsl2.Add(reffButton);
-		hsl2.Add(refButton);
-
-		//set up the handlers for the different buttons
-		reffButton.Clicked += BeginReff;
-		refButton.Clicked  += BeginRef;
-
-
-
-        //boolean to keep track of if the next step needs to be commenced
-        int neccessarryFilledEntries = matrix.RowNum * matrix.ColNum;
-		int filledEntries = 0;
-		//while all the entries are NOT filled, keep checking
-        while (filledEntries < neccessarryFilledEntries)
+    /// <summary>
+    /// When the RREF button is clicked, this method will be called. If every entry is filled in with a number, then 
+    /// the backing 2D array will be filled in. Else, a warning will pop up and tell the user to fill out the grid 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BeginRRef(object sender, EventArgs e)
+	{
+		double value;
+        //loop through both dimensions of the matrix. If we can't parse one thing to a double, then display an alert
+        for (int i = 0; i < matrix.RowNum; i++)
         {
-			foreach(Entry entry in entries)
-			{
-				entry.TextChanged
-			}
+            for (int j = 0; j < matrix.ColNum; j++)
+            {
+				if (double.TryParse(entries["" + i + j].Text, out value))
+					//set it
+					matrix.backingArray[i, j] = value;
+				else
+				{
+					DisplayAlert("Invalid Input", "Please enter numbers into each entry box in the grid and try again", "OK");
+					return;
+				}
+            }
         }
 
-
-
-
-
+		matrix.Ref();
 
     }
 
-	private void BeginReff(object sender, EventArgs e)
-	{
-		DisplayAlert("yes", "yues", "yes");
-	}
-
+	/// <summary>
+	/// When the Ref button is clicked, this method will be called. If every entry is filled in with a number, then 
+	/// the backing 2D array will be filled in. Else, a warning will pop up and tell the user to fill out the grid 
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
     private void BeginRef(object sender, EventArgs e)
     {
-        DisplayAlert("no", "no", "no");
+        double value;
+        //loop through both dimensions of the matrix. If we can't parse one thing to a double, then display an alert
+        for (int i = 0; i < matrix.RowNum; i++)
+        {
+            for (int j = 0; j < matrix.ColNum; j++)
+            {
+                if (double.TryParse(entries["" + i + j].Text, out value))
+                    //set it
+                    matrix.backingArray[i, j] = value;
+                else
+                {
+                    DisplayAlert("Invalid Input", "Please enter numbers into each entry box in the grid and try again", "OK");
+                    return;
+                }
+            }
+        }
+		matrix.Rref();
     }
 }
 
