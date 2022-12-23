@@ -10,53 +10,72 @@ public partial class MainPage : ContentPage
 		matrix = new Matrix();
 	}
 
-	/// <summary>
-	/// Sets column dimension for the matrix. Doesn't follow perfect mvc, but it would be really annoying to do this the 
-	/// "right" way
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void SetColNum(object sender, EventArgs e)
-	{
-		int value = -1;
+    /// <summary>
+    /// Checks the number. If it is an integer greater than 0 (for now) set the number as the bound. If it's not, then 
+    /// display an alert and have user try again
+    /// </summary>
+    /// <returns>false if the desired number does not check out. True otherwise</returns>
+    private bool TrySetColumns()
+    {
+        int value = -1;
 
-		if (!int.TryParse(colNum.Text, out value))
-			DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+        //set column number
+        if (!int.TryParse(colNum.Text, out value))
+        {
+            DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+            return false;
+        }
 
-		//not sure about this
-		else if (value < 1)
-			DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+        //not sure about this
+        else if (value < 1)
+        {
+            DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+            return false;   
+        }
+        
+        matrix.ColNum = value;
+        return true;
+    }
 
-		else
-			matrix.ColNum = value;
+    /// <summary>
+    /// Checks the number. If it is an integer greater than 0 (for now) set the number as the bound. If it's not, then 
+    /// display an alert and have user try again
+    /// </summary>
+    /// <returns>false if the desired number does not check out. True otherwise</returns>
+    private bool TrySetRows()
+    {
+        int value = -1;
 
-	}
-	/// <summary>
-	/// Doesn't follow perfect mvc, but it would be really annoying to do this the 
-	/// "right" way
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void SetRowNum(object sender, EventArgs e)
-	{
-		int value = -1;
+        if (!int.TryParse(rowNum.Text, out value))
+        {
+            DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+            return false;
+        }
+        else if (value < 1)
+        {
+            DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
+            return false;
+        }
 
-		if (!int.TryParse(rowNum.Text, out value))
-			DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
-
-		else if (value < 1)
-			DisplayAlert("Invalid Input", "Value must be in the set of natural numbers", "cancel");
-
-		else
-			matrix.RowNum = value;
+        matrix.RowNum = value;
+        return true;
+    }
 
 
-
-	}
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 	private void SetDimensions(object sender, EventArgs e)
 	{
-		if (matrix.RowNum > 0 && matrix.ColNum > 0)
+        if (!TrySetColumns())
+            return;
+
+        if (!TrySetRows())
+            return;
+        //
+        if (matrix.RowNum > 0 && matrix.ColNum > 0)
 		{
 			matrix.BackingArray = new double[matrix.RowNum, matrix.ColNum];
 			HSL.Clear();
@@ -64,17 +83,8 @@ public partial class MainPage : ContentPage
         }
 
 		else
-		{
 			DisplayAlert("Invalid Input", "Enter in your desired dimensions and try again", "cancel");
-
-		}
 	}
-
-	private void SetBackingArr()
-	{
-
-	}
-	
 
 	/// <summary>
 	/// Makes a grid of entries that is rowNum rows by colNum columns
@@ -153,8 +163,7 @@ public partial class MainPage : ContentPage
             }
         }
 
-		matrix.Ref();
-
+		matrix.Rref();
     }
 
 	/// <summary>
@@ -181,7 +190,7 @@ public partial class MainPage : ContentPage
                 }
             }
         }
-		matrix.Rref();
+		matrix.Ref();
     }
 }
 

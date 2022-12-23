@@ -9,7 +9,9 @@
             x:Name="vsl"
             >
             <HorizontalStackLayout
-                    x:Name="HSL">
+                    x:Name="HSL"
+                HeightRequest="40"
+                WidthRequest="400">
                 <Label
                     Text="Rows: "
                     SemanticProperties.HeadingLevel="Level1"
@@ -18,16 +20,15 @@
                     />
                 <Entry
                         x:Name = "rowNum"
-                        TextChanged = "SetRowNum"
+                        
                     />
 
                 <Label
-                        Text = "x Columns:"
+                        Text = "Columns:"
                         FontSize = "32"
                     />
                 <Entry
                         x:Name = "colNum"
-                        TextChanged="SetColNum"
                     />
 
                 <Button

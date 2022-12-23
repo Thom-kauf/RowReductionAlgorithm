@@ -8,12 +8,7 @@ public class Matrix
     //dimensions of the matrix
     private int colNum;
     private int rowNum;
-    public double[,] backingArray;
-
-    public Matrix ()
-    {
-        
-    }   
+    public double[,]? backingArray;   
 
     /// <summary>
     /// property for columns of the matrix
@@ -34,7 +29,7 @@ public class Matrix
     /// <summary>
     /// property for setting the backing array and accessing
     /// </summary>
-    public double[,] BackingArray
+    public double[,]? BackingArray
     {
         get { return backingArray; }
         set { backingArray = value; }
