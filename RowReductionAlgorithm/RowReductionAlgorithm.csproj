@@ -52,4 +52,19 @@
 	  <ProjectReference Include="..\Model\Model.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="AnswerPage.xaml.cs">
+	    <DependentUpon>AnswerPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AnswerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SetValuesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

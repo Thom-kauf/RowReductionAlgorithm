@@ -7,8 +7,13 @@
 
         <VerticalStackLayout
             x:Name="vsl"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            
             >
             <HorizontalStackLayout
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
                     x:Name="HSL"
                 HeightRequest="40"
                 WidthRequest="400">
@@ -36,6 +41,7 @@
                         Text="Set Dimensions"
                         Clicked="SetDimensions"
                         />
+
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
