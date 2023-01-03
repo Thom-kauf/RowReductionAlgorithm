@@ -2,6 +2,8 @@
     
 /// <summary>
 /// This class will handle the logic for the algorithm
+/// 
+/// Authors: Thomas Kauffman and ChatGPT
 /// </summary>
 public class Matrix
 {
