@@ -7,13 +7,12 @@
 
         <VerticalStackLayout
             x:Name="vsl"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
+            HorizontalOptions="Center"
             
             >
             <HorizontalStackLayout
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="EndAndExpand"
                     x:Name="HSL"
                 HeightRequest="40"
                 WidthRequest="400">

@@ -48,6 +48,8 @@ public partial class AnswerPage : ContentPage
         {
             //make the entries in a list of vertical stack layouts essentially
             HorizontalStackLayout hsl = new();
+            hsl.HorizontalOptions = LayoutOptions.Center;
+            hsl.VerticalOptions = LayoutOptions.Center;
             vsl.Add(hsl);
 
 
@@ -55,6 +57,9 @@ public partial class AnswerPage : ContentPage
             {
                 //show it in gui
                 Entry entry = new Entry();
+                entry.WidthRequest = 450 / matrix.ColNum;
+                entry.HeightRequest = 200 / matrix.RowNum;
+                entry.HorizontalOptions = LayoutOptions.Center;
                 hsl.Add(entry);
 
                 //add to dictionary to keep track of index

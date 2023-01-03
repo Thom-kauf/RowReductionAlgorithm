@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RowReductionAlgorithm.SetValuesPage"
              Title="SetValuesPage"
-             x:Name="content">
+             x:Name="content"
+             >
     <ScrollView>
         <VerticalStackLayout
                 x:Name="vsl"

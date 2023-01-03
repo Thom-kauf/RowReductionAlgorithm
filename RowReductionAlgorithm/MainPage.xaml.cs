@@ -3,7 +3,6 @@
 public partial class MainPage : ContentPage
 {
 	private Matrix matrix;
-	private Dictionary<string, Entry> entries;
 	public MainPage()
 	{
 		InitializeComponent();

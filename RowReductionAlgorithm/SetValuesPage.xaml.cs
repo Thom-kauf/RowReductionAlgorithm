@@ -28,7 +28,8 @@ public partial class SetValuesPage : ContentPage
         {
             //make the entries in a list of vertical stack layouts essentially
             HorizontalStackLayout hsl = new();
-
+            hsl.HorizontalOptions = LayoutOptions.Center;
+            hsl.VerticalOptions = LayoutOptions.Center;
         
             vsl.Add(hsl);
 
@@ -37,8 +38,8 @@ public partial class SetValuesPage : ContentPage
             {
                 //show it in gui
                 Entry entry = new Entry();
-                entry.HeightRequest = this.Height / matrix.RowNum;
-                entry.WidthRequest = this.Width / matrix.ColNum;
+                entry.WidthRequest = 450 / matrix.ColNum;
+                entry.HeightRequest = 200 / matrix.RowNum;
                 hsl.Add(entry);
 
                 //add to dictionary to keep track of index
@@ -55,10 +56,15 @@ public partial class SetValuesPage : ContentPage
     {
         //create the buttons
         HorizontalStackLayout hsl2 = new();
+        hsl2.HorizontalOptions = LayoutOptions.Center;
+        hsl2.VerticalOptions = LayoutOptions.Center;
         vsl.Add(hsl2);
 
         Button refButton = new();
         refButton.Text = "Reduce";
+
+        refButton.HorizontalOptions = LayoutOptions.Center;
+
         hsl2.Add(refButton);
 
         //set up the handler
