@@ -5,7 +5,7 @@ that this project idea comes to fruition.
 
 The Interactive Row Reduction Algorithm Calculator is a .NET MAUI application, built with a combination of C# and XML.
 
-The goal of this project is to build a useful application, but more importantly to practice event driven programming. 
+The goal of this project is to build a useful application for linear algebra, but more importantly to practice event driven programming and building desktop applications. 
 
 ### How to use
 
