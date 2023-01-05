@@ -18,22 +18,77 @@ public partial class AnswerPage : ContentPage
     private void DisplayResults()
     {
         MakeGrid();
-
-        double[,] newBackingArr = Matrix.RowReduce(matrix.BackingArray);
-
-        for (int i = 0; i < matrix.RowNum; i++)
-        {
-            for (int j = 0; j < matrix.ColNum; j++)
-            {
-                double newValue = newBackingArr[i, j];
-
-                if (newValue.ToString().Equals("-0"))
-                    newBackingArr[i, j] = 0;
-
-                entries["" + i + j].Text = newBackingArr[i, j].ToString();
-            }
-        }
+        RowReduce();
     }
+
+    /// <summary>
+    /// ChatGPT helped with this method. I'm going to modify it to trigger an event that displays each step.
+    /// </summary>
+    /// <param name="matrix"></param>
+    /// <returns></returns>
+    public void RowReduce()
+    {
+        int rows = matrix.BackingArray.GetLength(0);
+        int cols = matrix.BackingArray.GetLength(1);
+        
+        for (int i = 0; i < rows; i++)
+        {
+            // Find the pivot row
+            int pivot = i;
+            for (int j = i + 1; j < rows; j++)
+            {
+                if (Math.Abs(matrix.backingArray[j, i]) > Math.Abs(matrix.backingArray[pivot, i]))
+                {
+                    pivot = j;
+                    //highlight the pivot row with a color
+                    //entries["" + j + i].BackgroundColor = Colors.LightBlue;
+                }
+
+            }
+
+            // Swap the pivot row with the current row
+            if (pivot != i)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    double temp = matrix.BackingArray[i, j];
+                    matrix.BackingArray[i, j] = matrix.BackingArray[pivot, j];
+                    matrix.BackingArray[pivot, j] = temp;
+
+                    entries["" + i + j].Text = matrix.backingArray[i, j].ToString();
+                }
+
+                
+
+            }
+            
+
+            // Normalize the current row
+            double divisor = matrix.BackingArray[i, i];
+            for (int j = 0; j < cols; j++)
+            {
+                matrix.BackingArray[i, j] /= divisor;
+                entries["" + i + j].Text = matrix.backingArray[i, j].ToString();
+            }
+            
+
+            // Eliminate the current variable from the other rows
+            for (int j = 0; j < rows; j++)
+            {
+                if (j == i) continue;
+
+                double factor = matrix.BackingArray[j, i];
+                for (int k = 0; k < cols; k++)
+                {
+                    matrix.BackingArray[j, k] -= factor * matrix.BackingArray[i, k];
+                    entries["" + j + k].Text = matrix.backingArray[j, k].ToString();
+                }
+            }
+            
+        }
+
+    }
+
 
     /// <summary>
     /// Makes a grid of entries that is rowNum rows by colNum columns
@@ -66,5 +121,6 @@ public partial class AnswerPage : ContentPage
                 entries.Add("" + i + j, entry);
             }
         }
+
     }
 }
